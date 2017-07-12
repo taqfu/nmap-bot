@@ -1,0 +1,8 @@
+
+define("ROOT_PASSWORD", "");
+
+define("PUSHOVER_USER_KEY", "");
+define("PUSHOVER_APP_TOKEN", "");
+
+define ("SCAN_TYPE", "-sN");
+define ("IP_RANGE", "");
