@@ -1,9 +1,24 @@
 <?php
+
+if (!file_exists(getcwd() . "/nmap-bot.cfg") && !file_exists(getcwd() . "/approved-macs.cfg")){
+  exit("This script needs nmap-bot.cfg and approved-macs.cfg in order to run.\n");
+
+}
+
+if (!file_exists(getcwd() . "/nmap-bot.cfg")){
+  exit("This script needs nmap-bot.cfg in order to run.\n");
+} 
+
+if (!file_exists(getcwd() . "/approved-macs.cfg")){
+  exit("This script needs approved-macs.cfg in order to run.\n" );
+
+}
+
 include "nmap-bot.cfg";
 
-$timestamp = mdate("m-d-Y-His");
-$filename = getcwd() . "/scans/" . date ("m-d-Y") . "/" . $timestamp;
-exec("bash -lc 'echo " . ROOT_PASSWORD . " | sudo -S nmap " . SCAN_TYPE . " -oX " . $filename  . ".xml " . IP_RANGE . "'");
+$timestamp = date("m-d-Y-His");
+$filename = getcwd() . "/scans/" . $timestamp . ".xml";
+exec("bash -lc 'echo " . ROOT_PASSWORD . " | sudo -S nmap " . SCAN_TYPE . " -oX " . $filename  . " " . IP_RANGE . "'");
 parse_scan ($filename);
 
 function parse_scan($filename){
